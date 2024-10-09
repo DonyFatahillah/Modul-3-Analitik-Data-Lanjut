@@ -7,10 +7,10 @@ import mysql.connector
 def get_connection():
     try:
         connection = mysql.connector.connect(
-            host='your-database-host',  # Ganti dengan alamat host database Anda
-            user='your-username',        # Ganti dengan username Anda
-            password='your-password',     # Ganti dengan password Anda
-            database='your-database'      # Ganti dengan nama database Anda
+            host='localhost',  # Ganti dengan alamat host database Anda
+            user='root',        # Ganti dengan username Anda
+            password='',     # Ganti dengan password Anda
+            database='db_dal'      # Ganti dengan nama database Anda
         )
         return connection
     except mysql.connector.Error as err:
