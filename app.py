@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import mysql.connector
-from sqlalchemy import create_engine
 
 # Function to establish connection to MySQL
 def get_connection():
@@ -10,8 +9,8 @@ def get_connection():
         connection = mysql.connector.connect(
             host='localhost',  # e.g., "localhost"
             user='root',
-            password='',
-            database='db_dal'
+            password='',  # Change to your MySQL password
+            database='db_dal'  # Ensure your database exists
         )
         return connection
     except mysql.connector.Error as err:
@@ -25,7 +24,7 @@ def get_data_from_db():
         return pd.DataFrame()  # Return an empty dataframe if the connection fails
     
     try:
-        query = "SELECT * FROM pddikti_example"
+        query = "SELECT * FROM pddikti_example"  # Change this to your actual table name
         df = pd.read_sql_query(query, conn)  # Use read_sql_query with mysql.connector
     except Exception as e:
         st.error(f"Error fetching data: {e}")
@@ -36,7 +35,7 @@ def get_data_from_db():
     return df
 
 # Title of the app
-st.title('Streamlit Simple App')
+st.title('Aplikasi Toko Sembako')
 
 # Adding sidebar navigation
 page = st.sidebar.radio("Pilih halaman", ["Dataset", "Visualisasi", "Form Input"])
@@ -62,7 +61,7 @@ elif page == "Visualisasi":
     data = get_data_from_db()
 
     if not data.empty:
-        # Filter by university
+        # Filter by university or any other relevant field
         selected_university = st.selectbox('Pilih Universitas', data['universitas'].unique())
         filtered_data = data[data['universitas'] == selected_university]
 
