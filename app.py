@@ -7,7 +7,7 @@ import mysql.connector
 def get_connection():
     try:
         connection = mysql.connector.connect(
-            host='localhost',  # Ganti dengan alamat host database Anda
+            host='127.0.0.1',  # Ganti dengan alamat host database Anda
             user='root',        # Ganti dengan username Anda
             password='',     # Ganti dengan password Anda
             database='db_dal'      # Ganti dengan nama database Anda
