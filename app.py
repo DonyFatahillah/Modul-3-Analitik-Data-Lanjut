@@ -7,10 +7,10 @@ import mysql.connector
 def get_connection():
     try:
         connection = mysql.connector.connect(
-            host='localhost',  # e.g., "localhost"
-            user='root',
-            password='',  # Change to your MySQL password
-            database='db_dal'  # Ensure your database exists
+            host='your-database-host',  # Ganti dengan alamat host database Anda
+            user='your-username',        # Ganti dengan username Anda
+            password='your-password',     # Ganti dengan password Anda
+            database='your-database'      # Ganti dengan nama database Anda
         )
         return connection
     except mysql.connector.Error as err:
@@ -24,7 +24,7 @@ def get_data_from_db():
         return pd.DataFrame()  # Return an empty dataframe if the connection fails
     
     try:
-        query = "SELECT * FROM pddikti_example"  # Change this to your actual table name
+        query = "SELECT * FROM pddikti_example"  # Ganti dengan nama tabel Anda
         df = pd.read_sql_query(query, conn)  # Use read_sql_query with mysql.connector
     except Exception as e:
         st.error(f"Error fetching data: {e}")
@@ -35,7 +35,7 @@ def get_data_from_db():
     return df
 
 # Title of the app
-st.title('Aplikasi Toko Sembako')
+st.title('Streamlit Simple App')
 
 # Adding sidebar navigation
 page = st.sidebar.radio("Pilih halaman", ["Dataset", "Visualisasi", "Form Input"])
@@ -61,7 +61,7 @@ elif page == "Visualisasi":
     data = get_data_from_db()
 
     if not data.empty:
-        # Filter by university or any other relevant field
+        # Filter by university
         selected_university = st.selectbox('Pilih Universitas', data['universitas'].unique())
         filtered_data = data[data['universitas'] == selected_university]
 
